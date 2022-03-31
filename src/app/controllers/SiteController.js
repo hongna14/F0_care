@@ -2,6 +2,21 @@ const Admin = require('../models/Admin');
 const { mongooseToObject } = require('../../util/mongoose');
 const { send } = require('express/lib/response');
 const bcrypt = require('bcrypt');
+const passport = require('passport');
+var LocalStrategy = require('passport-local').Strategy;
+
+// passport session setup
+// used to serialize the user for the session
+// passport.serializeUser(function(user, done) {
+//     done(null, user.id);
+// });
+// // used to deserialize the user
+// passport.deserializeUser(function(id, done) {
+//     User.findById(id, function(err, user) {
+//         done(err, user);
+//     });
+// });
+
 
 const saltRounds = 10;
 
@@ -15,28 +30,27 @@ class SiteController {
     }
 
 
-    // GET/login
-    loginPage(req, res, next) {
+    // GET/signup
+    signupPage(req, res, next) {
 
+        res.render('signup');
+    }
+
+    //POST/signup
+    signup(req, res, next) {
+
+    }
+
+    loginPage(req, res, next) {
         res.render('login');
     }
 
-    //POST/login
     login(req, res, next) {
-        const formData = req.body;
-        // res.json(req.body)
-        const admin = new Admin(formData);
-        bcrypt.hash(admin.password, saltRounds, function(err, hash) {
-            // Store hash in your password DB.
-            console.log('hash', hash);
-            admin.password = hash;
-            admin.save()
-                // .then(() => res.redirect('/'))
-                .then(() => res.json(admin))
-                .catch(e => {
+        Admin.find({})
+            .then(function(admins) {
 
-                });
-        });
+            })
+            .catch(next);
     }
 
 }

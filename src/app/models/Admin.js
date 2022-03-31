@@ -16,18 +16,4 @@ const Admin = new Schema({
 
 });
 
-// Admin.methods.encryptPassword = function(password) {
-//     return bcrypt.hashSync(password, bcrypt.genSaltSync(5), null);
-// };
-
-// Admin.methods.validPassword = function(password) {
-//     return bcrypt.compareSync(password, this.password);
-// };
-
-// bcrypt.hash(Admin.password, saltRounds, function(err, hash) {
-//     // Store hash in your password DB.
-//     console.log('hash', hash);
-//     Admin.password = hash;
-// });
-
 module.exports = mongoose.model('Admin', Admin);
